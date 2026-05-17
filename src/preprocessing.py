@@ -1,6 +1,6 @@
 import pandas as pd
 
-def clean_data(df):
+def preprocess_data(df):
     
     # Remove duplicates
     df = df.drop_duplicates()
@@ -8,7 +8,8 @@ def clean_data(df):
     # Handle missing values
     df = df.ffill()
     
-    # Convert date
-    df['date'] = pd.to_datetime(df['year'], format='%Y')
-    
+    # Convert date safely
+    if "year" in df.columns:
+        df['date'] = pd.to_datetime(df['year'], format='%Y')
+
     return df

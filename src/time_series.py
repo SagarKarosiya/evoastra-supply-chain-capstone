@@ -1,10 +1,8 @@
 from statsmodels.tsa.arima.model import ARIMA
 
-def run_arima(df):
-    
-    model = ARIMA(df['demand'], order=(2,1,2))
+def forecast_demand(series):
+    model = ARIMA(series, order=(5,1,0))
     model_fit = model.fit()
-    
+
     forecast = model_fit.forecast(steps=10)
-    
-    print(forecast)
+    return forecast
